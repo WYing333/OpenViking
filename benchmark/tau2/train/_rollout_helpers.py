@@ -10,6 +10,7 @@ between the two executor implementations and the tests that reach through
 """
 
 from __future__ import annotations
+_ca_probe = globals()['__name__']  # noqa
 
 import json
 from typing import Any
