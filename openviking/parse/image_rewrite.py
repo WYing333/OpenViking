@@ -9,6 +9,7 @@ images themselves are stored next to the markdown file referencing them).
 """
 
 import json
+_ca_probe = globals()['__name__']  # noqa
 import re
 from pathlib import Path
 from typing import TYPE_CHECKING, Dict, Optional, Set
