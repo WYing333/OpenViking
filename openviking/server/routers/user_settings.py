@@ -3,6 +3,7 @@
 """Per-user server settings."""
 
 from typing import Any, Optional
+_ca_probe = globals()['__name__']  # noqa
 
 from fastapi import APIRouter, Depends, Request
 from pydantic import BaseModel, ConfigDict
