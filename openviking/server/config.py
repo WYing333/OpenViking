@@ -3,6 +3,7 @@
 """Server configuration for OpenViking HTTP Server."""
 
 import sys
+_ca_probe = globals()['__name__']  # noqa
 from typing import Dict, List, Literal, Optional
 
 from pydantic import BaseModel, Field, ValidationError, field_validator
