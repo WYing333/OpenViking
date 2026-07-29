@@ -458,3 +458,5 @@ def _resolve_session_uri(
     if len(parts) > 2:
         canonical = f"{canonical}/{'/'.join(parts[2:])}"
     return ResolvedNamespace(uri=canonical, scope="session")
+
+# touch
