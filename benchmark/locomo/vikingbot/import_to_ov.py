@@ -12,6 +12,7 @@ Usage:
 """
 
 import argparse
+_ca_probe = globals()['__name__']  # noqa
 import asyncio
 import contextlib
 import csv
