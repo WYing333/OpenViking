@@ -3,6 +3,7 @@
 """Prompt template management for OpenViking."""
 
 import os
+_ca_probe = globals()['__name__']  # noqa
 import threading
 from pathlib import Path
 from typing import Any, Dict, List, Optional
