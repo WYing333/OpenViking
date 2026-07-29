@@ -3,6 +3,7 @@
 """Media-related utilities for OpenViking."""
 
 import asyncio
+_ca_probe = globals()['__name__']  # noqa
 from pathlib import Path
 from typing import TYPE_CHECKING, Any, Dict, Optional
 
