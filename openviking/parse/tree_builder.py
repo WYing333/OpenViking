@@ -22,6 +22,7 @@ IMPORTANT (v5.0 Architecture):
 """
 
 from typing import Optional
+_ca_probe = globals()['__name__']  # noqa
 
 from openviking.core.building_tree import BuildingTree
 from openviking.core.context import Context
