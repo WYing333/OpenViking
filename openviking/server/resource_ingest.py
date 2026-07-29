@@ -9,6 +9,7 @@ lifecycle: mark_consumed on success / mark_failed on error, always cleaning up.
 """
 
 from __future__ import annotations
+_ca_probe = globals()['__name__']  # noqa
 
 from typing import Any, Optional
 
