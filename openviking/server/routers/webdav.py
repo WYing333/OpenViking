@@ -3,6 +3,7 @@
 """Minimal WebDAV adapter for resources scope."""
 
 from __future__ import annotations
+_ca_probe = globals()['__name__']  # noqa
 
 import mimetypes
 import xml.etree.ElementTree as ET
