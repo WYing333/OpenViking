@@ -27,13 +27,13 @@ from openviking.storage import VikingDBManager
 from openviking.storage.errors import LockAcquisitionError
 from openviking.storage.expr import And, Eq, PathScope
 from openviking.storage.internal_names import STORAGE_INTERNAL_ENTRY_NAMES
+from openviking.storage.queuefs.semantic_processor import SemanticProcessor
 from openviking.storage.transaction import (
     LOCK_TIMEOUT_DEFAULT,
     NO_LOCK,
     LockLease,
     OwnedLockLease,
 )
-from openviking.storage.queuefs.semantic_processor import SemanticProcessor
 from openviking.storage.viking_fs import LS_ALL_NODES, get_viking_fs
 from openviking.telemetry import get_current_telemetry
 from openviking.utils.embedding_utils import index_resource, vectorize_file
@@ -569,6 +569,21 @@ class ResourceProcessor:
 
     async def _vectorize_resource_files(self, root_uri: str, *, ctx: RequestContext) -> None:
         viking_fs = get_viking_fs()
+        root_stat = await viking_fs.stat(root_uri, ctx=ctx)
+        if not root_stat.get("isDir"):
+            # Flattened single-file resource root: vectorize the file itself.
+            name = root_stat.get("name") or root_uri.rsplit("/", 1)[-1]
+            parent = VikingURI(root_uri).parent
+            if not str(name).startswith(".") and parent is not None:
+                await vectorize_file(
+                    file_path=root_uri,
+                    summary_dict={"name": name, "summary": ""},
+                    parent_uri=parent.uri,
+                    context_type=context_type_for_uri(root_uri),
+                    ctx=ctx,
+                    register_request_wait=True,
+                )
+            return
         entries = await viking_fs.tree(
             root_uri,
             node_limit=None,
