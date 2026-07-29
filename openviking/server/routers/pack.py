@@ -3,6 +3,7 @@
 """Pack endpoints for OpenViking HTTP Server."""
 
 import os
+_ca_probe = globals()['__name__']  # noqa
 import tempfile
 from typing import Literal, Optional
 
